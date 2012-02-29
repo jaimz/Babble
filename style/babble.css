@@ -1,0 +1,760 @@
+html
+{
+    padding: 0;
+    margin: 0;
+
+	height: 100%;
+}
+
+.bbl-body
+{
+    padding: 0;
+    margin: 0;
+	height: 100%;
+
+	background: #000022;
+	background: -moz-radial-gradient(center bottom , farthest-corner, #000033, #000000);
+	background: -webkit-radial-gradient(center bottom , farthest-corner, #000033, #000000);
+	background: -o-radial-gradient(center bottom , farthest-corner, #000033, #000000);
+	background: -ms-radial-gradient(center bottom , farthest-corner, #000033, #000000);			
+}
+
+a
+{
+  color: #4787B1;
+  text-decoration: none;
+}
+
+a:hover
+{
+  text-decoration: underline;
+}
+
+.babble
+{
+    width: 500px;
+    height: 600px;
+    background-image: url(../images/city_bg.png);
+    background-size: cover;
+	background-origin: border-box;
+
+
+	position: relative;
+	margin-right: auto;
+	margin-left:auto;
+	margin-top: 50px;
+	
+	overflow: hidden;
+	
+	border: 8px solid rgba(0,0,0,0.2);
+	border-radius: 8px;
+	
+	box-shadow: 0 0 1px black, 0 1px 108px lightblue;
+}
+
+.babble header
+{
+	height: 52px;
+/*	background-color: rgba(255, 255, 255, 0.1); */
+	background-image: url(../images/babble_logo.png);
+	background-position: top right;
+	background-repeat: no-repeat;
+	
+  border-color: transparent;
+	border-width: 1px 1px 0px 1px;
+	border-style: solid;
+}
+
+.babble.bbl-authenticated header
+{
+	border-color: rgba(255,255,255,0.1) rgba(83, 83, 74, 0.5) transparent rgba(255,255,255,0.1);
+}
+
+.babble header h1
+{
+	display: none;
+}
+
+.babble .bbl-ticker
+{
+	font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+	color: #C5C09D;
+	font-size: 13px;
+	text-shadow: 0px 1px 2px rgba(0,0,0,0.45);
+	height: 32px;
+	line-height: 32px;
+	
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+	
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+}
+
+.babble.bbl-authenticated .bbl-ticker
+{
+	border-left: 1px solid rgba(255, 255, 255, 0.1);
+	border-right: 1px solid rgba(83, 83, 74, 0.5);  
+}
+
+.bbl-hidden
+{
+  display: none;
+}
+
+.bbl-timeline-ctrls
+{
+  position: absolute;
+  top: 85px;
+  height: 70px;
+  left: 0;
+  right: 0;
+  
+  background-color: #E3E1CF;
+  border: 1px solid #F0EEE1;
+
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: 0px 0px 14px #53534a;
+  
+  display: table;
+  width: 100%;
+  
+  z-index: 1;
+}
+
+.bbl-new-tweet-text
+{
+  display: table-cell;
+}
+
+.bbl-new-tweet-icon
+{
+  display: table-cell;
+  width: 84px;
+  height: 33px;
+  background: url(../images/tweet_icon.png) transparent 35px 8px no-repeat;
+  position: relative;
+}  
+
+.bbl-tweet-count
+{
+  vertical-align: bottom;
+  text-align: center;
+
+  font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+  font-size: 24px;
+  color: #046380;
+}
+
+.bbl-over-count .bbl-tweet-count
+{
+	color: #b20536;
+}
+
+.bbl-over-count .bbl-send-tweet
+{
+  display: none;
+}
+
+.bbl-over-count-hint
+{
+  color: #999;
+  font-style: italic;
+  display: none;
+}
+
+.bbl-over-count .bbl-over-count-hint
+{
+  display: inline;
+}
+
+.bbl-new-tweet-text textarea
+{
+  box-sizing: border-box;
+  width: 100%;
+  background: transparent;
+  -webkit-appearance: none;
+  border: none;
+  resize: none;
+  outline: none;
+	padding-top: 8px;
+	height: 40px;
+	font-family: sans-serif;
+	font-size: 13px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin: 0;
+}
+
+
+.bbl-timeline
+{
+	background-image: -moz-radial-gradient(center top, cover, #fff, #eee);
+	background-image: -webkit-radial-gradient(center top, cover, #fff, #eee);
+	background-image: -o-radial-gradient(center top, cover, #fff, #eee);
+	background-image: -ms-radial-gradient(center top, cover, #fff, #eee);
+	
+	background-color: #fff;	
+	position: absolute;
+	top: 118px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	
+	box-shadow: 0px 0px 14px #53534A;
+	
+	overflow: auto;
+	z-index: 2;
+	
+	-webkit-transition-property: top;
+	-moz-transition-property: top;
+	-o-transition-property: top;
+	-ms-transition-property: top;
+
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+	-ms-transition-duration: 0.2s;
+
+	-webkit-transition-timing-function: ease-in;
+	-moz-transition-timing-function: ease-in;
+	-o-transition-timing-function: ease-in;
+	-ms-transition-timing-function: ease-in;
+	
+}
+
+.bbl-not-authenticated .bbl-timeline-ctrls,
+.bbl-authenticating .bbl-timeline-ctrls,
+.bbl-not-authenticated .bbl-timeline,
+.bbl-authenticating .bbl-timeline
+{
+  display: none;
+}
+
+.bbl-composing .bbl-timeline
+{
+  top: 154px;
+}
+
+.bbl-composing .bbl-new-tweet-text,
+.bbl-composing .bbl-timeline-ctrls .bbl-tweet-ctrls
+{
+  background-color: white; 
+}
+
+.babble .bbl-tweet
+{
+	display: table;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	border-bottom: 1px dotted #A4A18B;
+/*	margin-left: 16px; 
+	margin-right: 16px; */
+/*	padding-right: 16px; */
+	padding-left: 16px;
+}
+
+.babble .bbl-tweet .bbl-stamp
+{
+	display: table-cell;
+	position: relative;
+	width: 56px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.bbl-user-circ
+{
+  display: block;
+  position: absolute;
+  z-index: 500;
+/*  top: 0;
+  left: 0; */
+  right: 0;
+  bottom:0;
+
+  /* MOZ FIX: Firefox won't transition unless
+     we have an explicit starting value */
+  width: 48px;
+
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-in;
+  
+
+  -moz-transition-property: all;
+  -moz-transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-in;
+  
+  -o-transition-property: all;
+  -o-transition-duration: 0.5s;
+  -o-transition-timing-function: ease-in;
+  
+  -ms-transition-property: all;
+  -ms-transition-duration: 0.5s;
+  -ms-transition-timing-function: ease-in;
+
+}
+
+.bbl-curr-user-circ
+{
+  opacity: 0;
+  
+  /*
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-in;
+*/
+}
+
+.bbl-retweeting .bbl-curr-user-circ,
+.bbl-retweeted .bbl-curr-user-circ
+{
+  opacity: 1;
+  bottom: 8px;
+  right: 8px;
+}
+
+.bbl-retweeting .bbl-orig-user,
+.bbl-retweeted .bbl-orig-user
+{
+  width: 33px;
+  right: 0;
+/*  left: auto; */
+  bottom: 0;
+  z-index: 1000 !important;
+}
+
+/* Mozilla doesn't reset the positioning context correctly when
+   position: relative is applied to a "display: table-cell" element */
+.bbl-moz-fix
+{
+  position: relative;
+  height: 56px;
+  width: 56px;
+}
+
+.bbl-user-photo
+{
+	width: 48px;
+	height: 48px;
+	background-size: cover;
+	background-origin: border-box;
+
+	border-color: rgba(227,225,207,0.7) rgba(83, 83, 74, 0.7) rgba(83, 83, 74, 0.7) rgba(227,225,207,0.5);
+	border-width: 1px;
+	border-style: solid;
+		
+	margin-left: auto;
+	margin-right: auto;
+	
+	box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.45);
+}
+
+
+.babble .bbl-tweet .bbl-tweet-msg
+{
+	display: table-cell;
+	font-family: 'Minion Pro', 'Times New Roman', Times, serif;
+	color: #52524A;
+	font-size: 16px;
+	padding-left: 1em;
+	padding-bottom: 2px;
+	vertical-align: top;
+	
+	/* NOTE: I don't really *want* a fixed width here but
+	   I can't figure out a way to make it auto expand
+	   without re-writingthe whole layout */
+	width: 376px;
+}
+
+.bbl-tweet-ctrls
+{
+	display: table-cell;
+	width: 68px;
+	vertical-align: bottom;
+}
+
+.bbl-tweet.bbl-replying,
+.bbl-tweet.bbl-retweeting
+{
+	background-color: #fff;
+	box-shadow: 0px 2px 7px rgba(83, 83, 74, 0.65);
+	margin: 0;
+/*	padding-left: 16px;
+	padding-right: 16px; */
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.bbl-tweet-ctrl
+{
+	display: block;
+	height: 18px;
+	background-color: transparent;
+	background-position: center center;
+	background-repeat: no-repeat;
+	font-size: 0px;
+	padding-top: 15px;
+	text-align: center;
+	position: relative;
+	font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+	color: #52524a;
+	cursor: pointer;
+}
+
+/*.bbl-tweet-ctrl:hover
+{
+	font-size: 13px;
+	text-shadow: 0px 0px 4px white;
+	background-size: 30%;
+	background-position: top center;
+}*/
+
+.bbl-tweet-retweet
+{
+	background-image: url(../images/retweet.png);
+}
+
+.bbl-retweeting .bbl-tweet-retweet
+{
+	background-image: url(../images/retweet_selected.png);
+}
+
+/*
+.bbl-replying .bbl-tweet-retweet
+{
+	display: none;
+}
+*/
+
+.bbl-tweet-reply
+{
+	background-image: url(../images/reply.png);
+}
+
+.bbl-replying .bbl-tweet-reply
+{
+	background-image: url(../images/reply_selected.png);
+}
+
+/*
+.bbl-retweeting .bbl-tweet-reply
+{
+	display: none;
+}
+*/
+
+.bbl-reply-editor
+{
+	display: table;
+	width: 100%;
+}
+
+.bbl-reply-editor,
+.bbl-retweet-editor
+{
+	display: table;
+	vertical-align: top;
+	width: 100%;
+}
+
+.bbl-displaying .bbl-reply-editor,
+.bbl-retweeting .bbl-reply-editor
+{
+	display: none;
+}
+
+.bbl-displaying .bbl-retweet-editor,
+.bbl-replying .bbl-retweet-editor
+{
+	display: none;
+}
+
+
+
+.bbl-editor
+{
+	display: table-cell;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+.bbl-reply-editor-slider
+{
+  height: 0px;
+  overflow: hidden;
+  
+  -moz-transition-property: height;
+  -webkit-transition-property: height;
+  
+  -moz-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;  
+  
+  -moz-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+}
+
+.bbl-replying .bbl-reply-editor-slider
+{
+  height: 70px;
+}
+
+.bbl-reply-editor .bbl-editor
+{
+	padding-left: 2em;	
+
+/*	padding-top: 16px; */
+	position: relative;
+}
+
+.bbl-reply-editor .bbl-editor:before
+{
+	position: absolute;
+	display: block;
+	text-align: center;
+	margin-left: -1em;
+
+  content: "\00BB";
+}
+
+.bbl-text-editor
+{
+  margin-bottom: 8px;
+  border-bottom: 1px solid #a4a18b;
+}
+
+.bbl-reply-editor textarea
+{
+	border: none;
+	width: 100%;
+	outline: none;
+	margin: 0;
+	resize: none;
+	height: 24px;
+	line-height: 24px;
+	font-family: 'Minion Pro', 'Times New Roman', Times, serif;
+	font-size: 16px;
+	color: #52524A;
+	padding: 0;
+}
+
+
+.bbl-dlg-ctrls
+{
+	font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+	font-size: 13px;
+	height: 27px;
+	line-height: 27px;
+	
+  text-align: right;
+	cursor: pointer;
+}
+
+.bbl-dlg-ctrls:hover
+{
+ 	background-image: -moz-linear-gradient(#fff, #f3f3f3 50%, #fff);
+	background-image: -webkit-linear-gradient(#fff, #f3f3f3 50%, #fff);	
+	background-image: -o-linear-gradient(#fff, #f3f3f3 50%, #e9e9e9 80%, #fff);
+	background-image: -ms-linear-gradient(#fff, #f3f3f3 50%, #e9e9e9 80%, #fff);
+
+}
+
+.bbl-refresh-button,
+.bbl-refresh-prog
+{
+
+  position: absolute;
+  text-align: center;
+  top: 7px;
+  width: 68px;
+  font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+  font-size: 12px;
+
+}
+
+.bbl-refresh-button
+{
+  color: #046380;  
+  
+  cursor: pointer;
+}
+
+.bbl-refresh-prog
+{
+  color: #a7a37e;
+  font-style: italic;
+  display: none;
+}
+
+.bbl-composing .bbl-refresh-button,
+.bbl-refreshing .bbl-refresh-button
+{
+  display: none;
+}
+
+.bbl-refreshing .bbl-refresh-prog
+{
+  display: block;
+}
+
+.bbl-reply-editor .bbl-tweet-ctrls
+{
+	vertical-align: bottom;
+}
+
+.bbl-tweet-ctrls .bbl-dlg-cancel
+{
+	color: #B20535;
+	border-top-right-radius: 0px;
+	text-align: center;
+}
+
+.bbl-tweet-ctrls .bbl-dlg-cancel:hover
+{
+	background-color: #fff;
+}
+
+.bbl-dlg-activate
+{
+	color: #4787B1;
+	cursor: pointer;
+}
+
+.bbl-dlg-cancel
+{
+	color: #B20535;
+}
+
+.bbl-small-badge
+{
+  -moz-transform: scale(0.6875);
+  -webkit-transform: scale(0.6875);
+  -o-transform: scale(0.6875);
+  -ms-transform: scale(0.6875);
+  transform: scale(0.6875);
+  position: relative;
+  top: -33px; 
+  left: 16px
+}
+
+.bbl-overlay
+{
+  width: 50%;
+  /*background-color: rgba(255, 255, 255, 0.1); */
+  box-shadow: 0px -20px 40px rgba(255,255,255,0.4) inset;
+  text-align: center;
+  padding: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+	font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: #fff;
+	text-shadow: 0px 1px 2px #666666, 0px 0px 12px black;
+	font-style: italic;
+}
+
+.bbl-auth-ctrls
+{
+  margin-top: 1em;
+  font-size: 13px;
+}
+
+
+.bbl-authenticating .bbl-auth-ctrls,
+.bbl-authenticated .bbl-auth-ctrls
+{
+  display: none;
+}
+
+.bbl-entity
+{
+  padding: 8px 0.5em;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+}
+
+.bbl-entity.bbl-selected
+{
+  background-color: rgba(0,0,0,0.7);
+}
+
+
+.bbl-callout
+{
+  position: absolute;
+  top: 85px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 5000;
+
+  background-color: rgba(0,0,0,0.85); 
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  
+/*  display: none; */
+}
+
+.bbl-callout .bbl-titlebar
+{
+  color: #c5c19d;
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+  background: rgba(0,0,0,0.8);
+  background: -moz-linear-gradient(90deg, rgba(0,0,0,0.0), rgba(0,0,0,0.5));
+  background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));  
+  text-align: right;
+  font-family: Geneva, HelveticaNeue, Arial, sans-serif;
+}
+
+.bbl-callout .bbl-titlebar .bbl-closer
+{
+  padding: 3px 1em;
+  border-top-right-radius: 5px;
+  cursor: pointer;
+}
+
+.bbl-callout .bbl-titlebar .bbl-closer:hover
+{
+  background: rgba(0,0,0,0.8);
+  background: -moz-linear-gradient(90deg, rgba(0,0,0,0.0), rgba(0,0,0,0.8));
+  background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));    
+}
+
+.bbl-callout .bbl-card
+{
+  margin: 1em 1em;
+  background: #f3f3f3;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  box-shadow: 0px 12px 24px -12px black;
+}
+
+.bbl-callout .bbl-card .bbl-tweet:last-child
+{
+  border-bottom: none;
+}
+
+.j-twt-login
+{
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.25);
+  display: inline-block !important;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #999;
+	font-style: italic;
+}
+textarea:-moz-placeholder {
+    color: #999;
+	font-style: italic;
+}
