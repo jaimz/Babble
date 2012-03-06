@@ -2,42 +2,42 @@
 
 
 (function() {
-	var Babble = J.CreateNamespace('J.Apps.Babble');
+  var Babble = J.CreateNamespace('J.Apps.Babble');
 	
   // Create an object implementing the Babble interface
-	// TODO: This should be an object, not a closure...
-	Babble.Create = function(rootEl) {
+  // TODO: This should be an object, not a closure...
+  Babble.Create = function(rootEl) {
     // The rool DOM element of teh interface
-		var _rootEl = rootEl;
-		
+    var _rootEl = rootEl;
+    
     // The text area in which a new tweet is composed
-		var _composer = null;
+    var _composer = null;
 
     // We send a new tweet when this buttonis clicked
-		var _composer_confirm = null;
+    var _composer_confirm = null;
 
     // Button to cancel the copmosition of a Tweet
-		var _composer_cancel = null;
-		
+    var _composer_cancel = null;
+    
     // The panel containing the user's home timeline
-		var _timeline_panel = null;
+    var _timeline_panel = null;
 
     // The panel containig status messages from the auth process
-		var _auth_status_msg = null;
-		
+    var _auth_status_msg = null;
+    
     // The Babble application instance
-		var _app = Babble.App;
+    var _app = Babble.App;
 
     // Shortcut to the Twitter proxy used by the app
-		var _twitter = Babble.App.Twitter;
-		
+    var _twitter = Babble.App.Twitter;
+    
 
     // The currently focused tweet textarea
-		var _tweet_text_box = null;
+    var _tweet_text_box = null;
     // The element displaying the number of characters left in the
     // tweet/reply the user is composing...
-		var _tweet_count = null;
-		
+    var _tweet_count = null;
+    
 
     // The overlay veil containing selected tweets
     var _call_out = null;
@@ -63,11 +63,11 @@
 
 
     // Called when we find the user is not authenticated with Twitter...
-		var _not_authenticated = function(k, s, d) {
-		  _rootEl.addClass('bbl-need-auth').addClass('bbl-not-authenticated').removeClass('bbl-authenticating');
-		  _auth_status_msg.text('Sign in to Twitter...');
-		};
-		
+    var _not_authenticated = function(k, s, d) {
+      _rootEl.addClass('bbl-need-auth').addClass('bbl-not-authenticated').removeClass('bbl-authenticating');
+      _auth_status_msg.text('Sign in to Twitter...');
+    };
+    
     
     // Called when the user authenticates with Twitter...
     var _did_authenticate = function() {
@@ -83,32 +83,32 @@
 
 
     // Show the reply UI for the selected tweet
-		var _show_reply_ui = function() {
-		  var tweet_rep = $(this).parents('.bbl-tweet');
-		  if (tweet_rep.length === 0) {
-		    console.warn('Could not get tweet when starting reply!');
-		    return;
-		  }
-		  
-		  tweet_rep.removeClass('bbl-displaying').removeClass('bbl-retweeting').addClass('bbl-replying');
-		  tweet_rep.find('.bbl-text-area').focus();
-		};
-		
+    var _show_reply_ui = function() {
+      var tweet_rep = $(this).parents('.bbl-tweet');
+      if (tweet_rep.length === 0) {
+        console.warn('Could not get tweet when starting reply!');
+        return;
+      }
+      
+      tweet_rep.removeClass('bbl-displaying').removeClass('bbl-retweeting').addClass('bbl-replying');
+      tweet_rep.find('.bbl-text-area').focus();
+    };
+    
 
 
     // Send a reply to the given tweet
-		var _do_tweet_reply = function() {
-		  var tweet_rep = $(this).parents('.bbl-tweet');
-		  if (tweet_rep.length === 0) {
-		    console.warn('Could not get tweet rep when starting reply!');
-		    return;
-		  }
-		  
- 		  var reply_to_id = tweet_rep.attr('data-tweetid');
-		  if (!reply_to_id) {
-		    console.warn("Can't get tweet ID when retweeting");
-		    return;
-		  }
+    var _do_tweet_reply = function() {
+      var tweet_rep = $(this).parents('.bbl-tweet');
+      if (tweet_rep.length === 0) {
+        console.warn('Could not get tweet rep when starting reply!');
+        return;
+      }
+      
+      var reply_to_id = tweet_rep.attr('data-tweetid');
+      if (!reply_to_id) {
+        console.warn("Can't get tweet ID when retweeting");
+        return;
+      }
 
       var ta = tweet_rep.find('.bbl-text-area');
       if (ta.length === 0) {
@@ -125,55 +125,55 @@
       tweet_rep.removeClass('bbl-replying').addClass('bbl-displaying');
 
       _twitter.Tweet(text, reply_to_id);
-		};
-		
+    };
+    
 
 
     // Show the retweet UI for the selected tweet
-		var _show_retweet_ui = function() {
- 		  var tweet_rep = $(this).parents('.bbl-tweet');
-		  if (tweet_rep.length === 0) {
-		    console.warn('Could not get tweet when starting reply!');
-		    return;
-		  }
-		  
+    var _show_retweet_ui = function() {
+      var tweet_rep = $(this).parents('.bbl-tweet');
+      if (tweet_rep.length === 0) {
+        console.warn('Could not get tweet when starting reply!');
+        return;
+      }
+      
 
-		  tweet_rep.removeClass('bbl-displaying').removeClass('bbl-replying').addClass('bbl-retweeting');
-		};
-		
+      tweet_rep.removeClass('bbl-displaying').removeClass('bbl-replying').addClass('bbl-retweeting');
+    };
+    
 
     // Retweet the selected tweet
-		var _do_retweet = function() {
-		  var tweet_rep = $(this).parents('.bbl-tweet');
-		  if (tweet_rep.length === 0) {
-		    console.warn('Could not get tweet rep when retweeting!');
-		    return;
-		  }
-		  
-		  var id = tweet_rep.attr('data-tweetid');
-		  if (!id) {
-		    console.log('Could not get tweet ID when retweeting');
-		    return;
-		  }
-		  
-		  tweet_rep.removeClass('bbl-retweeting').addClass('bbl-displaying');
-		  
+    var _do_retweet = function() {
+      var tweet_rep = $(this).parents('.bbl-tweet');
+      if (tweet_rep.length === 0) {
+        console.warn('Could not get tweet rep when retweeting!');
+        return;
+      }
+      
+      var id = tweet_rep.attr('data-tweetid');
+      if (!id) {
+        console.log('Could not get tweet ID when retweeting');
+        return;
+      }
+      
+      tweet_rep.removeClass('bbl-retweeting').addClass('bbl-displaying');
+      
 
-		  _twitter.Retweet(id);
-		};
+      _twitter.Retweet(id);
+    };
 
 
-    // Hide the retweet/reply UI on the selected tweet...		
-		var _cancel_dialog = function() {
-		  var tweet_rep = $(this).parents('.bbl-tweet');
-		  if (tweet_rep.length === 0) {
-		    console.warn('Could not get tweet when cancelling dialog.');
-		    return;
-		  }
-		  
-		  tweet_rep.removeClass('bbl-replying').removeClass('bbl-retweeting').addClass('bbl-displaying');
-		};
-		
+    // Hide the retweet/reply UI on the selected tweet...   
+    var _cancel_dialog = function() {
+      var tweet_rep = $(this).parents('.bbl-tweet');
+      if (tweet_rep.length === 0) {
+        console.warn('Could not get tweet when cancelling dialog.');
+        return;
+      }
+      
+      tweet_rep.removeClass('bbl-replying').removeClass('bbl-retweeting').addClass('bbl-displaying');
+    };
+    
 
     // Called when the content of a tweet composition/reply changes - 
     // updates the character count left
@@ -192,43 +192,43 @@
     
     // The user has changed focus from one tweet textarea to another - make sure
     // we update the correct character counts
-		var _refocus_tweet_count = function(ta) {
-		  _tweet_box = $(ta).parents('.bbl-tweet-box');
-		  if (_tweet_box.length === 0)
-		    return;
-		  
-		  _tweet_count = _tweet_box.find('.bbl-tweet-count');
-		  if (_tweet_text_box)
-		    _tweet_text_box.off('keyup', _tweet_text_changed);
+    var _refocus_tweet_count = function(ta) {
+      _tweet_box = $(ta).parents('.bbl-tweet-box');
+      if (_tweet_box.length === 0)
+        return;
+      
+      _tweet_count = _tweet_box.find('.bbl-tweet-count');
+      if (_tweet_text_box)
+        _tweet_text_box.off('keyup', _tweet_text_changed);
 
-		  _tweet_text_box = $(ta);
-		  _tweet_text_box.on('keyup', _tweet_text_changed);
-		  
-		  _tweet_text_changed();
-		};
+      _tweet_text_box = $(ta);
+      _tweet_text_box.on('keyup', _tweet_text_changed);
+      
+      _tweet_text_changed();
+    };
 
-		
+    
     // A tweet composer/reply composer has been focused, show the 
     // correct elements
-		var _composer_focused = function() {
-		  _rootEl.addClass('bbl-composing');
-		  _refocus_tweet_count(this);
-		};
-		
+    var _composer_focused = function() {
+      _rootEl.addClass('bbl-composing');
+      _refocus_tweet_count(this);
+    };
+    
     // A composition has been cancelled - reset the UI
-		var _composer_reset = function() {
-		  _rootEl.removeClass('bbl-composing');
-		  _composer.val('');
-		};
-		
+    var _composer_reset = function() {
+      _rootEl.removeClass('bbl-composing');
+      _composer.val('');
+    };
+    
 
     // The user wants to send a tweet...
-		var _composer_confirmed = function() {
-		  var tweet_text = _composer.val();
-		  _composer_reset();
-		  _twitter.Tweet(tweet_text);
-		};
-		
+    var _composer_confirmed = function() {
+      var tweet_text = _composer.val();
+      _composer_reset();
+      _twitter.Tweet(tweet_text);
+    };
+    
 
 
     // Subscribe to various notifications from the Twitter service
@@ -323,36 +323,36 @@
     _composer = _rootEl.find('.bbl-timeline-ctrls .bbl-new-tweet-text textarea');
     _call_out = _rootEl.find('.bbl-callout');
     _auth_status_msg = _rootEl.find('.bbl-auth-status');
-		_timeline_panel = _rootEl.find('.bbl-timeline');
-		
+    _timeline_panel = _rootEl.find('.bbl-timeline');
+    
     // Wire up the necessary events
-		_rootEl.on('click', '.bbl-tweet-reply', _show_reply_ui);
-		_rootEl.on('click', '.bbl-tweet-retweet', _show_retweet_ui);
-		_rootEl.on('click', '.bbl-dlg-cancel', _cancel_dialog);
-		_rootEl.on('click', '.bbl-send-reply', _do_tweet_reply);
-		_rootEl.on('click', '.bbl-send-retweet', _do_retweet);
-		_rootEl.on('focus', '.bbl-text-area', _move_caret_to_end);
-		_rootEl.on('click', '.bbl-entity', _select_entity);
-		_rootEl.on('click', '.bbl-callout .bbl-closer', _hide_call_out);
-		_rootEl.on('click', '.bbl-refresh-button', _do_refresh);
-		_rootEl.on('click', '.bbl-timeline-ctrls .bbl-dlg-activate', _composer_confirmed);
-		_rootEl.on('click', '.bbl-timeline-ctrls .bbl-dlg-cancel', _composer_reset);
-		_composer.on('focus', _composer_focused);
-		
+    _rootEl.on('click', '.bbl-tweet-reply', _show_reply_ui);
+    _rootEl.on('click', '.bbl-tweet-retweet', _show_retweet_ui);
+    _rootEl.on('click', '.bbl-dlg-cancel', _cancel_dialog);
+    _rootEl.on('click', '.bbl-send-reply', _do_tweet_reply);
+    _rootEl.on('click', '.bbl-send-retweet', _do_retweet);
+    _rootEl.on('focus', '.bbl-text-area', _move_caret_to_end);
+    _rootEl.on('click', '.bbl-entity', _select_entity);
+    _rootEl.on('click', '.bbl-callout .bbl-closer', _hide_call_out);
+    _rootEl.on('click', '.bbl-refresh-button', _do_refresh);
+    _rootEl.on('click', '.bbl-timeline-ctrls .bbl-dlg-activate', _composer_confirmed);
+    _rootEl.on('click', '.bbl-timeline-ctrls .bbl-dlg-cancel', _composer_reset);
+    _composer.on('focus', _composer_focused);
+    
 
     // This is probably wrong - make this function a constructor
-		return {};
-	};
+    return {};
+  };
 
 
   // The Babbble app is an application instance shared by all Babbles
   // It finds all the Babble UIs on the page and holds an instance of
   // a Twitter proxy
   Babble.App = (function() {
-		var _twitter = J.Comm.Twitter.Default;
-		if (!_twitter)
-			_twitter = J.Comm.Twitter.CreateProxy();
-	  
+    var _twitter = J.Comm.Twitter.Default;
+    if (!_twitter)
+      _twitter = J.Comm.Twitter.CreateProxy();
+    
     var _start = function () {
       var _createBabble = Babble.Create;
       var _hasTwitterAuth = J.Comm.Twitter.HasAuth;
@@ -374,11 +374,11 @@
       Start: _start,
       Twitter: _twitter
     };
-	}());
+  }());
 
-	
+  
   // Start the Babble app on page load...
-	$(document).ready(function() {
-		Babble.App.Start();
-	});
+  $(document).ready(function() {
+    Babble.App.Start();
+  });
 }());
