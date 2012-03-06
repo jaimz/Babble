@@ -196,7 +196,7 @@
 		  _tweet_box = $(ta).parents('.bbl-tweet-box');
 		  if (_tweet_box.length === 0)
 		    return;
-		    
+		  
 		  _tweet_count = _tweet_box.find('.bbl-tweet-count');
 		  if (_tweet_text_box)
 		    _tweet_text_box.off('keyup', _tweet_text_changed);
@@ -265,7 +265,7 @@
     var _show_call_out = function() {
       if (_call_out_visible === true)
         return;
-        
+      
       _call_out.removeClass('bbl-hidden');
       _call_out_visible = true;
     };
@@ -275,7 +275,7 @@
     var _hide_call_out = function() {
       if (_call_out_visible === false)
         return;
-        
+      
       _call_out.addClass('bbl-hidden');
       _call_out_visible = false;  
       
@@ -294,13 +294,13 @@
       var tid = _selected_entity.attr('data-tid');
       
       if (_selected_entity.hasClass('bbl-selected')) {
-      
+        
         // TODO: This...
-//        _selected_entity.removeClass('bbl-selected');
-//        _twitter.DeselectTweet(tid);
+        //        _selected_entity.removeClass('bbl-selected');
+        //        _twitter.DeselectTweet(tid);
         
       } else {
-      
+        
         if (e.shiftKey === false) {
           if (_selected_entity !== null) {
             var c = _ticker_panel.find('.bbl-selected');
@@ -352,11 +352,11 @@
 		var _twitter = J.Comm.Twitter.Default;
 		if (!_twitter)
 			_twitter = J.Comm.Twitter.CreateProxy();
-	 
+	  
     var _start = function () {
       var _createBabble = Babble.Create;
       var _hasTwitterAuth = J.Comm.Twitter.HasAuth;
-    
+      
       var _createBabbleJQF = (function(i, v) { _createBabble($(v)); });
       var _hasTwitterAuthJQF = (function(i, v) { _hasTwitterAuth($(v)); });
 
@@ -366,7 +366,7 @@
       babbles.each(_hasTwitterAuthJQF);
       
       ko.applyBindings(_twitter.GetViewModel());
-  
+      
       _twitter.CheckForAccount();
     };
     
