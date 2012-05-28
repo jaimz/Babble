@@ -3,11 +3,11 @@
 
 (function() {
   var Babble = J.CreateNamespace('J.Apps.Babble');
-	
+  
   // Create an object implementing the Babble interface
   // TODO: This should be an object, not a closure...
   Babble.Create = function(rootEl) {
-    // The rool DOM element of teh interface
+    // The rool DOM element of the interface
     var _rootEl = rootEl;
     
     // The text area in which a new tweet is composed
@@ -16,7 +16,7 @@
     // We send a new tweet when this buttonis clicked
     var _composer_confirm = null;
 
-    // Button to cancel the copmosition of a Tweet
+    // Button to cancel the composition of a Tweet
     var _composer_cancel = null;
     
     // The panel containing the user's home timeline
@@ -59,6 +59,7 @@
     // proxy
     var _have_home_timeline = function() {
       _rootEl.removeClass('bbl-refreshing');
+      jQuery('time.bbl-timestamp').timeago();
     };
 
 
@@ -104,7 +105,7 @@
         return;
       }
       
-      var reply_to_id = tweet_rep.attr('data-tweetid');
+       var reply_to_id = tweet_rep.attr('data-tweetid');
       if (!reply_to_id) {
         console.warn("Can't get tweet ID when retweeting");
         return;
@@ -131,7 +132,7 @@
 
     // Show the retweet UI for the selected tweet
     var _show_retweet_ui = function() {
-      var tweet_rep = $(this).parents('.bbl-tweet');
+       var tweet_rep = $(this).parents('.bbl-tweet');
       if (tweet_rep.length === 0) {
         console.warn('Could not get tweet when starting reply!');
         return;
@@ -196,7 +197,7 @@
       _tweet_box = $(ta).parents('.bbl-tweet-box');
       if (_tweet_box.length === 0)
         return;
-      
+        
       _tweet_count = _tweet_box.find('.bbl-tweet-count');
       if (_tweet_text_box)
         _tweet_text_box.off('keyup', _tweet_text_changed);
@@ -244,7 +245,7 @@
 
 
 
-    // This madness is simply places the caret at the end of a reply
+    // This madness simply places the caret at the end of a reply
     // textarea when it is first displayed
     var _move_caret_to_end = function() {
       if (typeof this.selectionStart === "number") {
@@ -265,7 +266,7 @@
     var _show_call_out = function() {
       if (_call_out_visible === true)
         return;
-      
+        
       _call_out.removeClass('bbl-hidden');
       _call_out_visible = true;
     };
@@ -275,7 +276,7 @@
     var _hide_call_out = function() {
       if (_call_out_visible === false)
         return;
-      
+        
       _call_out.addClass('bbl-hidden');
       _call_out_visible = false;  
       
@@ -294,13 +295,13 @@
       var tid = _selected_entity.attr('data-tid');
       
       if (_selected_entity.hasClass('bbl-selected')) {
-        
+      
         // TODO: This...
-        //        _selected_entity.removeClass('bbl-selected');
-        //        _twitter.DeselectTweet(tid);
+//        _selected_entity.removeClass('bbl-selected');
+//        _twitter.DeselectTweet(tid);
         
       } else {
-        
+      
         if (e.shiftKey === false) {
           if (_selected_entity !== null) {
             var c = _ticker_panel.find('.bbl-selected');
@@ -352,11 +353,11 @@
     var _twitter = J.Comm.Twitter.Default;
     if (!_twitter)
       _twitter = J.Comm.Twitter.CreateProxy();
-    
+   
     var _start = function () {
       var _createBabble = Babble.Create;
       var _hasTwitterAuth = J.Comm.Twitter.HasAuth;
-      
+    
       var _createBabbleJQF = (function(i, v) { _createBabble($(v)); });
       var _hasTwitterAuthJQF = (function(i, v) { _hasTwitterAuth($(v)); });
 
@@ -366,7 +367,7 @@
       babbles.each(_hasTwitterAuthJQF);
       
       ko.applyBindings(_twitter.GetViewModel());
-      
+  
       _twitter.CheckForAccount();
     };
     

@@ -60,6 +60,9 @@
             </svg>
             </div>
           </div>
+          <div class="bbl-tweet-author">
+            ${ user.screen_name }
+          </div>
           <div class="bbl-tweet-msg">
             {{html _j_html_text }}
           </div>
